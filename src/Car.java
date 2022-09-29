@@ -37,6 +37,22 @@ public class Car extends Transport {
         insurance = new Insurance();
     }
 
+    public void refill() {
+        System.out.print("Автомобиль " + getBrand() + ": ");
+        if (this.getFuel() != null && this.getFuel().equals("дизель")) {
+            System.out.println("заправляется дизелем на заправке.");
+            return;
+        }
+        if (this.getFuel() != null && this.getFuel().equals("бензин")) {
+            System.out.println("заправляется бензином на заправке.");
+            return;
+        }
+        if (this.getFuel() != null && this.getFuel().equals("электричество")) {
+            System.out.println("заряжается электричеством на специальных парковках.");
+            return;
+        }
+            System.out.println("нет данных о заправке.");
+    }
     public class Insurance {
         private int[] insTerm = new int[3];
         private int insPrice;
@@ -133,5 +149,10 @@ public class Car extends Transport {
     public void setSeasonRubber() {
         int month = LocalDate.now().getMonthValue();
         this.seasonRubber = (month > 3 && month < 11) ? "летняя" : "зимняя";
+    }
+
+    @Override
+    public String toString() {
+        return "Автомобиль " + getBrand() + " модель " + getModel() + ", способ заправки: ";
     }
 }

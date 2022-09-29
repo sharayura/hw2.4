@@ -55,6 +55,14 @@ public class Train extends Transport {
     public void setNumberOfCarriages(int numberOfCarriages) {
         this.numberOfCarriages = numberOfCarriages;
     }
+    public void refill() {
+        System.out.print("Поезд " + getBrand() + ": ");
+        if (this.getFuel() != null && this.getFuel().equals("дизель")) {
+            System.out.println("заправка осуществляется дизелем.");
+        } else {
+            System.out.println("нет данных о заправке.");
+        }
+    }
 
     @Override
     public String toString() {
