@@ -38,22 +38,21 @@ public class Car extends Transport {
     }
 
     public class Insurance {
-        private int[] insTerm = new int[3];
+        private LocalDate insTerm;
         private int insPrice;
         private String insNumber;
 
-        public Insurance(int[] insTerm, int insPrice, String insNumber) {
+        public Insurance(LocalDate insTerm, int insPrice, String insNumber) {
             this.insTerm = insTerm;
             this.insPrice = insPrice;
             this.insNumber = insNumber;
         }
 
         public Insurance() {
-            this(new int[]{LocalDate.now().getYear() + 1, LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth()},
-                    10000, "123456789");
+            this(LocalDate.now().plusYears(1), 10000, "123456789");
         }
 
-        public int[] getInsTerm() {
+        public LocalDate getInsTerm() {
             return insTerm;
         }
 
@@ -66,9 +65,7 @@ public class Car extends Transport {
         }
 
         public void setInsTerm(int year, int month, int day) {
-            this.insTerm[0] = year;
-            this.insTerm[1] = month;
-            this.insTerm[2] = day;
+            this.insTerm = LocalDate.of(year, month, day);
         }
 
         public void setInsPrice(int insPrice) {
@@ -82,9 +79,7 @@ public class Car extends Transport {
         }
 
         public void checkInsTerm() {
-            if ((insTerm[0] * 10000 + insTerm[1] * 100 + insTerm[2]) <= LocalDate.now().getYear() * 10000 +
-                    LocalDate.now().getMonthValue() * 100 + LocalDate.now().getDayOfMonth()) {
-
+            if (LocalDate.now().isAfter(insTerm)) {
                 System.out.println("Страховка просрочена");
             }
         }
